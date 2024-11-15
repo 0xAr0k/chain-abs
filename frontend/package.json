@@ -16,9 +16,11 @@
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "viem": "^2.21.45"
   },
   "devDependencies": {
+    "@privy-io/react-auth": "^1.94.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
