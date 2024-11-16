@@ -7,6 +7,8 @@ export default function Auth() {
 
   return (
     <Button
+      variant="default"
+      className="font-mono"
       onClick={
         !authenticated
           ? () => login({ loginMethods: ["email", "wallet"] })
