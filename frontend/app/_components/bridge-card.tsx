@@ -1,5 +1,4 @@
 "use client";
-import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -19,8 +18,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { WalletClient } from "viem";
+import { useWalletClient } from "../_hooks/useWalletClient";
+import { useState } from "react";
 
 export function CardWithForm() {
+  const { walletClient, address } = useWalletClient();
+  const [amount, setAmount] = useState<number>(0);
+  const [fromToken, setFromToken] = useState<string>("");
+  const [toToken, setToToken] = useState<string>("");
+  const [amountIn, setAmountIn] = useState<number>(0);
+  const [amountOut, setAmountOut] = useState<number>(0);
+  const [originChainId, setOriginChainId] = useState<number>(0);
+  const [destinationChainId, setDestinationChainId] = useState<number>(0);
   return (
     <Card className="w-[350px] font-mono">
       <CardHeader>
@@ -31,32 +41,66 @@ export function CardWithForm() {
         <form>
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="name">From</Label>
-              <Select>
-                <SelectTrigger id="framework">
-                  <SelectValue placeholder="Select Tokens" />
-                </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="next">Next.js</SelectItem>
-                  <SelectItem value="sveltekit">SvelteKit</SelectItem>
-                  <SelectItem value="astro">Astro</SelectItem>
-                  <SelectItem value="nuxt">Nuxt.js</SelectItem>
-                </SelectContent>
-              </Select>
+              <Label>From</Label>
+              <div className="flex flex-row  space-x-1 align-top">
+                <div className="flex w-full">
+                  <Select>
+                    <SelectTrigger id="framework">
+                      <SelectValue placeholder="Chain" />
+                    </SelectTrigger>
+                    <SelectContent position="popper">
+                      <SelectItem value="1">1</SelectItem>
+                      <SelectItem value="31337">31337</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="flex w-full">
+                  <Select>
+                    <SelectTrigger id="framework">
+                      <SelectValue placeholder="Tokens" />
+                    </SelectTrigger>
+                    <SelectContent position="popper">
+                      <SelectItem value="ETH">ETH</SelectItem>
+                      <SelectItem value="DAI">DAI</SelectItem>
+                      <SelectItem value="USDC">USDC</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="framework">To</Label>
-              <Select>
-                <SelectTrigger id="framework">
-                  <SelectValue placeholder="Select Tokens" />
-                </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="next">Next.js</SelectItem>
-                  <SelectItem value="sveltekit">SvelteKit</SelectItem>
-                  <SelectItem value="astro">Astro</SelectItem>
-                  <SelectItem value="nuxt">Nuxt.js</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="flex flex-row  space-x-1 align-top">
+                <div className="flex w-full">
+                  <Select>
+                    <SelectTrigger id="framework">
+                      <SelectValue placeholder="Chain" />
+                    </SelectTrigger>
+                    <SelectContent position="popper">
+                      <SelectItem value="1">1</SelectItem>
+                      <SelectItem value="31337">31337</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="flex w-full">
+                  <Select>
+                    <SelectTrigger id="framework">
+                      <SelectValue placeholder="Tokens" />
+                    </SelectTrigger>
+                    <SelectContent position="popper">
+                      <SelectItem value="ETH">ETH</SelectItem>
+                      <SelectItem value="DAI">DAI</SelectItem>
+                      <SelectItem value="USDC">USDC</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <Label>Amount</Label>
+              <Input
+                type="number"
+                placeholder="0.0"
+                onChange={(e) => setAmount(Number(e.target.value))}
+              />
             </div>
           </div>
         </form>
