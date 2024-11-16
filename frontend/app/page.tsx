@@ -1,13 +1,15 @@
-import Image from "next/image";
-import Auth from "./_components/auth";
+import { publicClient, walletClient } from "@/lib/client";
 import { CardWithForm } from "./_components/bridge-card";
 
-export default function Home() {
+export default async function Home() {
+  const [address] = await walletClient.getAddresses();
+  console.log("account addr: ", address);
+
   return (
     <div>
-      <main className="flex h-[92vh] flex-col overflow-hidden items-center justify-center">
+      <div className="flex h-[92vh] flex-col overflow-hidden items-center justify-center">
         <CardWithForm />
-      </main>
+      </div>
     </div>
   );
 }

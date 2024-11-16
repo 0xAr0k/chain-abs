@@ -1,9 +1,6 @@
 "use client";
-
-import { ThemeProvider } from "@/components/theme-provider";
 import { PrivyProvider } from "@privy-io/react-auth";
-import { createPublicClient, http } from "viem";
-import { sepolia } from "viem/chains";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -20,9 +17,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         },
       }}
     >
-      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-        {children}
-      </ThemeProvider>
+      {children}
     </PrivyProvider>
   );
 }

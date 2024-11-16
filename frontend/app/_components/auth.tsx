@@ -4,6 +4,7 @@ import { usePrivy } from "@privy-io/react-auth";
 
 export default function Auth() {
   const { login, logout, authenticated } = usePrivy();
+  console.log("auth: ", authenticated);
 
   return (
     <Button
@@ -11,7 +12,7 @@ export default function Auth() {
       className="font-mono"
       onClick={
         !authenticated
-          ? () => login({ loginMethods: ["email", "wallet"] })
+          ? () => login({ loginMethods: ["email"] })
           : () => logout()
       }
     >
