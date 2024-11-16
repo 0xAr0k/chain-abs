@@ -14,7 +14,6 @@ export default function Home() {
 
   return (
     <div>
-      {address && <div>{address}</div>}
       <div className="flex h-[92vh] flex-col overflow-hidden items-center justify-center">
         <CardWithForm />
       </div>

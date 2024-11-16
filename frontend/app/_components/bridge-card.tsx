@@ -44,7 +44,9 @@ export function CardWithForm() {
               <Label>From</Label>
               <div className="flex flex-row  space-x-1 align-top">
                 <div className="flex w-full">
-                  <Select>
+                  <Select
+                    onValueChange={(value) => setOriginChainId(Number(value))}
+                  >
                     <SelectTrigger id="framework">
                       <SelectValue placeholder="Chain" />
                     </SelectTrigger>
@@ -55,14 +57,29 @@ export function CardWithForm() {
                   </Select>
                 </div>
                 <div className="flex w-full">
-                  <Select>
+                  <Select onValueChange={(value) => setFromToken(value)}>
                     <SelectTrigger id="framework">
                       <SelectValue placeholder="Tokens" />
                     </SelectTrigger>
                     <SelectContent position="popper">
-                      <SelectItem value="ETH">ETH</SelectItem>
-                      <SelectItem value="DAI">DAI</SelectItem>
-                      <SelectItem value="USDC">USDC</SelectItem>
+                      <SelectItem
+                        value="ETH"
+                        onChange={() => setFromToken("ETH")}
+                      >
+                        ETH
+                      </SelectItem>
+                      <SelectItem
+                        value="DAI"
+                        onSelect={() => setFromToken("DAI")}
+                      >
+                        DAI
+                      </SelectItem>
+                      <SelectItem
+                        value="USDC"
+                        onSelect={() => setFromToken("USDC")}
+                      >
+                        USDC
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -72,7 +89,11 @@ export function CardWithForm() {
               <Label htmlFor="framework">To</Label>
               <div className="flex flex-row  space-x-1 align-top">
                 <div className="flex w-full">
-                  <Select>
+                  <Select
+                    onValueChange={(value) =>
+                      setDestinationChainId(Number(value))
+                    }
+                  >
                     <SelectTrigger id="framework">
                       <SelectValue placeholder="Chain" />
                     </SelectTrigger>
@@ -83,7 +104,7 @@ export function CardWithForm() {
                   </Select>
                 </div>
                 <div className="flex w-full">
-                  <Select>
+                  <Select onValueChange={(value) => setToToken(value)}>
                     <SelectTrigger id="framework">
                       <SelectValue placeholder="Tokens" />
                     </SelectTrigger>
@@ -104,6 +125,7 @@ export function CardWithForm() {
             </div>
           </div>
         </form>
+        <div>{originChainId}</div>
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline">Cancel</Button>
