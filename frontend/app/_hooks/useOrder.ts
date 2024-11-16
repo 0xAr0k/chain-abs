@@ -10,14 +10,13 @@ export function useOrder() {
     receverAddress: string,
     fromToken: string,
     toToken: string,
-    amountIn: number,
-    amountOut: number,
+    amount: number,
     originChainId: number,
     destinationChainId: number,
   ) {
     const authorization = await walletClient!.signAuthorization({
       account: address,
-      // TODO: change contract addr
+      // TODO: change to filler contract addr
       contractAddress: zeroAddress,
     });
 
@@ -30,8 +29,8 @@ export function useOrder() {
         receverAddress,
         fromToken,
         toToken,
-        amountIn,
-        amountOut,
+        amount,
+        amount,
         originChainId,
         destinationChainId,
       ],

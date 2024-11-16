@@ -21,9 +21,12 @@ import {
 import { WalletClient } from "viem";
 import { useWalletClient } from "../_hooks/useWalletClient";
 import { useState } from "react";
+import { useOrder } from "../_hooks/useOrder";
 
 export function CardWithForm() {
   const { walletClient, address } = useWalletClient();
+  const { openOrder } = useOrder();
+  const [recipientAddress, setRecipientAddress] = useState<string>("");
   const [amount, setAmount] = useState<number>(0);
   const [fromToken, setFromToken] = useState<string>("");
   const [toToken, setToToken] = useState<string>("");
@@ -62,24 +65,9 @@ export function CardWithForm() {
                       <SelectValue placeholder="Tokens" />
                     </SelectTrigger>
                     <SelectContent position="popper">
-                      <SelectItem
-                        value="ETH"
-                        onChange={() => setFromToken("ETH")}
-                      >
-                        ETH
-                      </SelectItem>
-                      <SelectItem
-                        value="DAI"
-                        onSelect={() => setFromToken("DAI")}
-                      >
-                        DAI
-                      </SelectItem>
-                      <SelectItem
-                        value="USDC"
-                        onSelect={() => setFromToken("USDC")}
-                      >
-                        USDC
-                      </SelectItem>
+                      <SelectItem value="ETH">ETH</SelectItem>
+                      <SelectItem value="DAI">DAI</SelectItem>
+                      <SelectItem value="USDC">USDC</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -122,6 +110,12 @@ export function CardWithForm() {
                 placeholder="0.0"
                 onChange={(e) => setAmount(Number(e.target.value))}
               />
+              <Label>Receiver</Label>
+              <Input
+                type="text"
+                placeholder="0x..."
+                onChange={(e) => setRecipientAddress(e.target.value)}
+              />
             </div>
           </div>
         </form>
@@ -129,7 +123,21 @@ export function CardWithForm() {
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline">Cancel</Button>
-        <Button>Submit</Button>
+        <Button
+          onClick={() =>
+            openOrder(
+              address!.toString(),
+              recipientAddress,
+              fromToken,
+              toToken,
+              amount,
+              originChainId,
+              destinationChainId,
+            )
+          }
+        >
+          Submit
+        </Button>
       </CardFooter>
     </Card>
   );
