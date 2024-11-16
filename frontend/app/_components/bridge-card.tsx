@@ -24,14 +24,12 @@ import { useState } from "react";
 import { useOrder } from "../_hooks/useOrder";
 
 export function CardWithForm() {
-  const { walletClient, address } = useWalletClient();
+  const { address } = useWalletClient();
   const { openOrder } = useOrder();
   const [recipientAddress, setRecipientAddress] = useState<string>("");
   const [amount, setAmount] = useState<number>(0);
   const [fromToken, setFromToken] = useState<string>("");
   const [toToken, setToToken] = useState<string>("");
-  const [amountIn, setAmountIn] = useState<number>(0);
-  const [amountOut, setAmountOut] = useState<number>(0);
   const [originChainId, setOriginChainId] = useState<number>(0);
   const [destinationChainId, setDestinationChainId] = useState<number>(0);
   return (
@@ -54,8 +52,8 @@ export function CardWithForm() {
                       <SelectValue placeholder="Chain" />
                     </SelectTrigger>
                     <SelectContent position="popper">
-                      <SelectItem value="1">1</SelectItem>
                       <SelectItem value="31337">31337</SelectItem>
+                      <SelectItem value="31338">31338</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -65,9 +63,11 @@ export function CardWithForm() {
                       <SelectValue placeholder="Tokens" />
                     </SelectTrigger>
                     <SelectContent position="popper">
-                      <SelectItem value="ETH">ETH</SelectItem>
-                      <SelectItem value="DAI">DAI</SelectItem>
-                      <SelectItem value="USDC">USDC</SelectItem>
+                      <SelectItem value="0x0Ea816e64248E5C2D3dbbe7700b74702f8e98734">
+                        ITT
+                      </SelectItem>
+                      {/* <SelectItem value="DAI">DAI</SelectItem>
+                      <SelectItem value="USDC">USDC</SelectItem> */}
                     </SelectContent>
                   </Select>
                 </div>
@@ -86,8 +86,8 @@ export function CardWithForm() {
                       <SelectValue placeholder="Chain" />
                     </SelectTrigger>
                     <SelectContent position="popper">
-                      <SelectItem value="1">1</SelectItem>
                       <SelectItem value="31337">31337</SelectItem>
+                      <SelectItem value="31338">31338</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -97,9 +97,11 @@ export function CardWithForm() {
                       <SelectValue placeholder="Tokens" />
                     </SelectTrigger>
                     <SelectContent position="popper">
-                      <SelectItem value="ETH">ETH</SelectItem>
-                      <SelectItem value="DAI">DAI</SelectItem>
-                      <SelectItem value="USDC">USDC</SelectItem>
+                      <SelectItem value="0x0Ea816e64248E5C2D3dbbe7700b74702f8e98734">
+                        ITT
+                      </SelectItem>
+                      {/* <SelectItem value="DAI">DAI</SelectItem>
+                      <SelectItem value="USDC">USDC</SelectItem> */}
                     </SelectContent>
                   </Select>
                 </div>
@@ -132,7 +134,7 @@ export function CardWithForm() {
               toToken,
               amount,
               originChainId,
-              destinationChainId,
+              destinationChainId
             )
           }
         >
