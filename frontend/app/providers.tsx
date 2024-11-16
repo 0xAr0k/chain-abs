@@ -1,5 +1,6 @@
 "use client";
 
+import { ThemeProvider } from "@/components/theme-provider";
 import { PrivyProvider } from "@privy-io/react-auth";
 import { createPublicClient, http } from "viem";
 import { sepolia } from "viem/chains";
@@ -7,7 +8,7 @@ import { sepolia } from "viem/chains";
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <PrivyProvider
-      appId="your-privy-app-id"
+      appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID!}
       config={{
         appearance: {
           theme: "dark",
@@ -19,7 +20,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         },
       }}
     >
-      {children}
+      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        {children}
+      </ThemeProvider>
     </PrivyProvider>
   );
 }
